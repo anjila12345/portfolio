@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Résumé — Anjila Subedi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f3;
+    --blush: #f2d9d0;
+    --rose: #c9736a;
+    --dusty: #8e6f6a;
+    --sage: #8fada0;
+    --sage-light: #d4e8e1;
+    --deep: #2e2320;
+    --mid: #5c4540;
+    --gold: #c9a96e;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--deep); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(253,248,243,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,115,106,0.12);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--rose); letter-spacing: 0.04em; }
+  .nav-back { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--mid); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-back:hover { color: var(--rose); }
+
+  /* RESUME HERO */
+  .resume-hero {
+    padding: 8rem 5rem 4rem;
+    background: linear-gradient(135deg, var(--blush) 0%, var(--cream) 50%, var(--sage-light) 100%);
+    position: relative; overflow: hidden;
+  }
+  .resume-hero::after {
+    content: 'RÉSUMÉ';
+    position: absolute; right: -20px; top: 50%; transform: translateY(-50%) rotate(90deg);
+    font-family: 'Playfair Display', serif;
+    font-size: 7rem; font-weight: 600;
+    color: rgba(201,115,106,0.07);
+    letter-spacing: 0.3em; pointer-events: none;
+    white-space: nowrap;
+  }
+  .resume-hero-inner { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+  .resume-avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 8px 30px rgba(201,115,106,0.25); flex-shrink: 0; }
+  .resume-hero-name { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--deep); line-height: 1.1; margin-bottom: 0.3rem; }
+  .resume-hero-name em { color: var(--rose); font-style: italic; }
+  .resume-hero-title { font-size: 1rem; color: var(--dusty); margin-bottom: 1rem; font-style: italic; font-family: 'Playfair Display', serif; }
+  .contact-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .contact-chip { display: flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.9rem; background: white; border-radius: 20px; font-size: 0.8rem; color: var(--mid); box-shadow: 0 2px 10px rgba(0,0,0,0.07); text-decoration: none; transition: all 0.2s; }
+  .contact-chip:hover { background: var(--rose); color: white; transform: translateY(-2px); }
+
+  /* LAYOUT */
+  .resume-body { display: grid; grid-template-columns: 1fr 2fr; gap: 0; min-height: 100vh; }
+  .sidebar { background: white; padding: 3rem 2.5rem; border-right: 1px solid rgba(201,115,106,0.1); }
+  .main-col { background: var(--cream); padding: 3rem 3.5rem; }
+
+  /* SECTION TITLES */
+  .res-section { margin-bottom: 2.8rem; }
+  .res-heading {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    color: var(--deep); margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--blush);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .res-heading-icon { font-size: 1rem; }
+
+  /* SKILLS SIDEBAR */
+  .skill-group { margin-bottom: 1.4rem; }
+  .skill-group-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.6rem; }
+  .skill-pill-wrap { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-pill { padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.78rem; font-weight: 500; background: var(--cream); color: var(--mid); border: 1px solid rgba(201,115,106,0.15); transition: all 0.2s; }
+  .skill-pill:hover { background: var(--rose); color: white; border-color: var(--rose); }
+
+  /* STRENGTHS */
+  .strength-item { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.65rem; font-size: 0.875rem; color: var(--mid); line-height: 1.4; }
+  .s-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rose); flex-shrink: 0; margin-top: 0.38rem; }
+
+  /* AFFILIATION */
+  .affil-card { padding: 1rem 1.2rem; background: var(--cream); border-radius: 12px; border-left: 3px solid var(--sage); font-size: 0.875rem; }
+  .affil-card strong { display: block; color: var(--deep); margin-bottom: 0.2rem; }
+  .affil-card span { color: var(--dusty); font-size: 0.8rem; }
+
+  /* EXPERIENCE TIMELINE */
+  .exp-item { position: relative; padding-left: 2rem; margin-bottom: 2.5rem; }
+  .exp-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: -1.5rem; width: 2px; background: linear-gradient(to bottom, var(--rose), var(--sage)); }
+  .exp-item:last-child::before { bottom: 0; }
+  .exp-dot { position: absolute; left: -6px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: white; border: 2.5px solid var(--rose); box-shadow: 0 2px 8px rgba(201,115,106,0.3); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.2rem; }
+  .exp-role { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--deep); }
+  .exp-date { font-size: 0.75rem; font-weight: 500; background: linear-gradient(135deg, var(--rose), var(--dusty)); color: white; padding: 0.2rem 0.7rem; border-radius: 20px; }
+  .exp-company { font-size: 0.85rem; color: var(--rose); font-weight: 500; margin-bottom: 0.7rem; }
+  .exp-list { list-style: none; }
+  .exp-list li { font-size: 0.875rem; color: var(--mid); line-height: 1.65; padding: 0.25rem 0 0.25rem 1.1rem; position: relative; }
+  .exp-list li::before { content: ''; position: absolute; left: 0; top: 0.68rem; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); }
+
+  /* OBJECTIVE */
+  .objective-box { background: white; border-radius: 16px; padding: 1.5rem 1.8rem; border-left: 4px solid var(--rose); font-size: 0.95rem; line-height: 1.8; color: var(--mid); box-shadow: 0 4px 18px rgba(0,0,0,0.05); margin-bottom: 2.8rem; }
+
+  /* AWARD CALLOUT */
+  .award-callout {
+    background: linear-gradient(135deg, #2e2320, #4a2f2c);
+    border-radius: 16px; padding: 1.8rem 2rem;
+    color: white; margin-bottom: 2.8rem;
+  }
+  .award-callout-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+  .award-callout-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .award-callout-body { font-size: 0.875rem; color: rgba(255,255,255,0.7); line-height: 1.65; }
+
+  /* BACK BUTTON */
+  .back-top { display: flex; justify-content: center; padding: 2.5rem; background: white; }
+  .back-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 2rem; border-radius: 50px; background: var(--rose); color: white; text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: all 0.25s; }
+  .back-btn:hover { background: var(--mid); transform: translateY(-2px); }
+
+  footer { padding: 1.5rem 3rem; background: var(--deep); color: rgba(255,255,255,0.4); text-align: center; font-size: 0.8rem; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 860px) {
+    nav { padding: 1rem 1.5rem; }
+    .resume-hero { padding: 7rem 1.5rem 3rem; }
+    .resume-body { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 1px solid rgba(201,115,106,0.1); padding: 2rem 1.5rem; }
+    .main-col { padding: 2rem 1.5rem; }
+    footer { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Anjila Subedi</div>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+</nav>
+
+<!-- RESUME HERO -->
+<div class="resume-hero">
+  <div class="resume-hero-inner">
+   
+    <div>
+      <h1 class="resume-hero-name">Anjila <em>Subedi</em></h1>
+      <p class="resume-hero-title">IT Support Analyst · Healthcare Technology</p>
+      <div class="contact-chips">
+        <a href="mailto:anjilasubedi95@gmail.com" class="contact-chip">✉️ anjilasubedi95@gmail.com</a>
+        <a href="tel:0460800797" class="contact-chip">📞 0460 800 797</a>
+        <a href="https://www.linkedin.com/in/anjila-subedi-264523237" target="_blank" class="contact-chip">🔗 LinkedIn</a>
+        <span class="contact-chip">📍 Auburn, NSW 2144</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="resume-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- TECHNICAL SKILLS -->
+    <div class="res-section reveal">
+      <h2 class="res-heading"><span class="res-heading-icon">🛠️</span> Technical Skills</h2>
+      <div class="skill-group">
+        <div class="skill-group-label">Microsoft Suite</div>
+        <div class="skill-pill-wrap">
+          <span class="skill-pill">Microsoft 365</span>
+          <span class="skill-pill">SharePoint</span>
+          <span class="skill-pill">Teams</span>
+          <span class="skill-pill">OneDrive</span>
+          <span class="skill-pill">Excel</span>
+          <span class="skill-pill">Outlook</span>
+          <span class="skill-pill">MS Project</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Development & Data</div>
+        <div class="skill-pill-wrap">
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">MS Visual Studio</span>
+          <span class="skill-pill">GitHub</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Project & IT Tools</div>
+        <div class="skill-pill-wrap">
+          <span class="skill-pill">Jira</span>
+          <span class="skill-pill">Trello</span>
+          <span class="skill-pill">SysAid (ITSM)</span>
+          <span class="skill-pill">Meditech</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KEY STRENGTHS -->
+    <div class="res-section reveal">
+      <h2 class="res-heading"><span class="res-heading-icon">✨</span> Key Strengths</h2>
+      <div class="strength-item"><span class="s-dot"></span>Strong verbal and written communication</div>
+      <div class="strength-item"><span class="s-dot"></span>Stakeholder engagement across clinical and admin teams</div>
+      <div class="strength-item"><span class="s-dot"></span>Empathy and professionalism in sensitive healthcare settings</div>
+      <div class="strength-item"><span class="s-dot"></span>Customer-focused support for non-technical users</div>
+      <div class="strength-item"><span class="s-dot"></span>System troubleshooting and user support</div>
+      <div class="strength-item"><span class="s-dot"></span>Time management in fast-paced environments</div>
+      <div class="strength-item"><span class="s-dot"></span>High attention to detail and accuracy</div>
+      <div class="strength-item"><span class="s-dot"></span>Fast learner — adapts quickly to new systems</div>
+      <div class="strength-item"><span class="s-dot"></span>Confidentiality and discretion</div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="res-section reveal">
+      <h2 class="res-heading"><span class="res-heading-icon">🎓</span> Education</h2>
+      <div style="margin-bottom:1.2rem;">
+        <div style="font-weight:500; font-size:0.9rem; color:var(--deep); margin-bottom:0.2rem;">ACS Professional Year — ICT</div>
+        <div style="font-size:0.82rem; color:var(--rose);">QIBA, Sydney Campus</div>
+        <div style="font-size:0.78rem; color:var(--dusty);">Sept 2025 – Present</div>
+      </div>
+      <div style="margin-bottom:1.2rem;">
+        <div style="font-weight:500; font-size:0.9rem; color:var(--deep); margin-bottom:0.2rem;">Master of Information Technology</div>
+        <div style="font-size:0.82rem; color:var(--rose);">King's Own Institute, Sydney NSW</div>
+        <div style="font-size:0.78rem; color:var(--dusty);">2022 – 2024</div>
+      </div>
+    </div>
+
+    <!-- AFFILIATION -->
+    <div class="res-section reveal">
+      <h2 class="res-heading"><span class="res-heading-icon">🖥️</span> Professional Affiliations</h2>
+      <div class="affil-card">
+        <strong>Australian Computer Society (ACS)</strong>
+        <span>Member ID: 4461343</span>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <main class="main-col">
+
+    <!-- CAREER OBJECTIVE -->
+    <div class="reveal">
+      <h2 class="res-heading"><span class="res-heading-icon">🎯</span> Career Objective</h2>
+      <div class="objective-box">
+        Detail-oriented IT professional with strong experience in technical support, workflow documentation, and system troubleshooting within healthcare environments. Skilled in analysing issues, supporting enterprise applications, and collaborating with cross-functional teams to improve system efficiency and user experience. Brings a continuous improvement mindset, strong communication skills, and the ability to work effectively in evolving, fast-paced environments. Proficient in Microsoft 365, SharePoint, and clinical systems, with a growing foundation in business analysis and process optimisation.
+      </div>
+    </div>
+
+    <!-- AWARD CALLOUT -->
+    <div class="award-callout reveal">
+      <div class="award-callout-label">🏆 Achievement</div>
+      <div class="award-callout-title">Employee Value Award — Chris O'Brian Lifehouse</div>
+      <div class="award-callout-body">Awarded for excellent performance, reliability, and providing effective support to clinical and administrative teams while maintaining high service standards. Recognised as the "glue that holds the team together" for proactive communication and support on Ward 9 North.</div>
+    </div>
+
+    <!-- WORK EXPERIENCE -->
+    <div class="reveal">
+      <h2 class="res-heading"><span class="res-heading-icon">💼</span> Work Experience</h2>
+      <div style="height:0.5rem;"></div>
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-header">
+          <div class="exp-role">IT Support Analyst</div>
+          <span class="exp-date">2026 – Present</span>
+        </div>
+        <div class="exp-company">Chris O'Brian Lifehouse</div>
+        <ul class="exp-list">
+          <li>Provide Tier 1–2 technical support to staff using the SysAid support ticketing system.</li>
+          <li>Log, track, and resolve IT incidents and service requests in line with SLAs.</li>
+          <li>Support the Meditech clinical application, assisting users with access, functionality, and issue resolution.</li>
+          <li>Install, configure, and maintain desktops, laptops, printers, and peripheral devices.</li>
+          <li>Manage user accounts, passwords, and system access permissions.</li>
+          <li>Diagnose and troubleshoot hardware, software, and network issues to minimise downtime.</li>
+          <li>Deliver clear technical assistance to non-technical users in a healthcare environment.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-header">
+          <div class="exp-role">Admin — Ward Clerk</div>
+          <span class="exp-date">2024 – 2026</span>
+        </div>
+        <div class="exp-company">Chris O'Brian Lifehouse</div>
+        <ul class="exp-list">
+          <li>Provided a warm and encouraging environment by greeting and helping patients, family members, and guests.</li>
+          <li>Provided administrative support in the Palliative Care unit, demonstrating empathy and discretion.</li>
+          <li>Managed incoming calls and directed queries as part of front-of-house and reception responsibilities.</li>
+          <li>Supported staff with Microsoft 365 (Teams, OneDrive, SharePoint) to enhance collaboration.</li>
+          <li>Maintained an efficient and confidential record management system to healthcare documentation standards.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-header">
+          <div class="exp-role">Customer Service — Food & Beverage Attendant</div>
+          <span class="exp-date">2022 – 2024</span>
+        </div>
+        <div class="exp-company">Compass Group</div>
+        <ul class="exp-list">
+          <li>Handled POS and EFTPOS transactions efficiently and accurately.</li>
+          <li>Managed inventory tracking and supply orders to ensure service continuity.</li>
+          <li>Organised and executed catering for functions, consistently receiving positive client feedback.</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="back-top">
+  <a href="index.html" class="back-btn">← Back to Portfolio</a>
+</div>
+
+<footer>
+  <p>© 2026 Anjila Subedi · <a href="index.html" style="color:var(--rose); text-decoration:none;">Portfolio Home</a></p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
